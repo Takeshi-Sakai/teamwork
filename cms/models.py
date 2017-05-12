@@ -13,7 +13,7 @@ class Improvement(models.Model):
         return self.name
 
 
-class HH(models.Model):
+class Hh(models.Model):
     """ヒヤリハット"""
     hh = models.ForeignKey(Improvement, verbose_name='改善', related_name='hhat')
     comment = models.TextField('内容', blank=True)
