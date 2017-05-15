@@ -1,16 +1,44 @@
-<!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE|default:"en-us" }}">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}HH{% endblock %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block extrahead %}{% endblock %}
-</head>
-<body>
-    <div class="container">
-        {% block content %}
-            {{ content }}
-        {% endblock %}
-    </div>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}改善{% endblock title %}
+
+{% block extrahead %}
+<style>
+    table {
+        margin-top: 8px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h3 class="page-header">改善</h3>
+{# <a href="{% url 'cms:hh_add' %}" class="btn btn-default btn-sm">追加</a> #}
+<a href="{% url 'cms:hh_add' %}" >追加</a>
+{# <table class="table table-striped table-bordered" #}
+<table>
+<thead>
+<tr>
+    <th>ID</th>
+    <th>名前</th>
+    <th>件名</th>
+    <th>処置完了日</th>
+    <th>上司確認</th>
+</tr>
+</thead>
+<tbody>
+{% for imp in imps %}
+<tr>
+    <td>{{ imp.id }}</td>
+    <td>{{ imp.name }}</td>
+    <td>{{ imp.subject }}</td>
+    <td>{{ imp.done_date }}</td>
+    <td>{{ imp.boxx_confirmation }}</td>
+    <td>
+        <a href="{% url 'cms:hh_mod' imp_id=imp.id %}">修正</a>
+        <a href="{% url 'cms:hh_del' imp_id=imp.id %}">削除</a>
+    </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock content %}
